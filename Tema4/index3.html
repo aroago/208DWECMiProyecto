@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let persona = {
+            nombre: "Aroa",
+            apellido: "Granero",
+            nombreCompleto: function () {
+                return persona.nombre + " " + persona.apellido;
+            }
+        };
+        console.log(persona.nombreCompleto());
+        let prop = "apellido";
+        console.log(persona[prop]);
+        for (prop in persona) {
+            if (typeof persona[prop] != "function") {
+                console.log(`la propiedad ${prop},tiene el valor ${persona[prop]}`)
+            }
+        }
+
+
+        //objetos mediante constructores
+        function Persona(nom, ape) {
+            this.nombre = nom;
+            this.apellido = ape;
+            this.nombreCompleto = () => this.nombre + " " + this.apellido;
+        }
+        let p1 = new Persona("Aroa", "Granero");
+        let p2 = new Persona("juan jose", "Granero");
+        console.log(p1.nombreCompleto());
+        console.log(p2.nombreCompleto());
+        console.log(typeof Persona);
+        console.log(p1 instanceof Object);
+        Persona.prototype.nacimiento=2001;
+        p1.nacimiento=2021;
+        console.log(p1.__proto__);
+
+        Persona.prototype.info=function(){
+            return (this.nombre+" "+this.apellido+" ha nacido en "+this.nacimiento);
+        }
+        console.log(p1.info());
+        Array.prototype.sumaElementos=function(){
+            let suma=0;
+            for(x of this){
+                suma+=x;
+            }
+            return suma;
+        }
+        let x=[4,5,6,7,8];
+        console.log(x.sumaElementos());
+
+
+        
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var cadena="Hola mundo";
+        var cadena2=new String("hola juan");//no utilizar nos da problemas
+        console.log(typeof(cadena));
+        console.log(typeof(cadena2));
+        var x=5;
+        var y=new Number(7);//no utilizar
+        console.log(x);
+        console.log(y);
+        var array2=new Array();//no utilizar
+        var array=[];
+
+        //STRINGS
+        var cadena3="Welcome To NY";
+
+        //Propiedades
+        console.log(cadena3.length);//longitud de la cadena
+        console.log(cadena+cadena3);
+        //comparar Strings
+        console.log(cadena==cadena3);//devuelve true si es igual y false si es distinto
+        console.log(cadena.localeCompare(cadena3,"es"));//devuelve -1 el que sea menor segun el orden alfabetico Español
+        //busqueda de caracteres
+        cadena2.charAt(3); //nos de el caracter que se en cuentra en la posicion que le indiquemos
+        console.log(cadena2.indexOf(4,4));
+        console.log(cadena2.lastIndexOf("n"));
+        console.log(cadena2.endsWith("DAW"));
+        console.log(cadena2.startsWith("hola"));
+        console.log(cadena2.includes("hola"));
+        //conversion
+        console.log(cadena2.toLocaleLowerCase());
+        //extraer o modificar
+        console.log(cadena2.replace("h","H"));
+        console.log(cadena.trim());
+    </script>
+</body>
+</html>

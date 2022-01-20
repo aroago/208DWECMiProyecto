@@ -1,0 +1,1 @@
+console.log("Buenos dias desde un Archivo externo JS");

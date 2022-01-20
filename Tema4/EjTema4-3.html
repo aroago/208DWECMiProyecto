@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aroa Granero Omañas</title>
+</head>
+
+<body>
+
+    <script>
+
+        let key = prompt("1.ClasePunto \n 2.media aritmética \n 3.ClaseFraccion \n 4.ClaseBaraja \n Introduce un numero de Ejercicio: ");
+
+        switch (key) {
+            case "1":
+                {
+                    /*1.Queremos crear objetos que representen puntos*/
+                    class Punto {
+                        constructor(x = 0, y = 0) {
+                            this.x = x;
+                            this.y = y;
+                        }
+                        cambiar(n1, n2) {
+                            this.x = n1;
+                            this.y = n2;
+                        }
+                        copia() {
+                            return new Punto(this.x, this.y);
+                        }
+                        iguales(otroPunto) {
+                            if (this.x == otroPunto.x && this.y == otroPunto.y) {
+                                console.log("Son iguales");
+                            } else {
+                                console.log("No son iguales");
+                            }
+                        }
+                        suma(puntoSumar) {
+                            if (puntoSumar instanceof Punto) {
+                                return new Punto(this.x + puntoSumar.x, this.y + puntoSumar.y);
+                            } else {
+                                return this;
+                            }
+                        }
+                        obtenerDistancia(puntoDistancia) {
+                            let distancia = Math.sqrt(Math.pow((puntoDistancia.x - this.x), 2) + (Math.pow((puntoDistancia.y - this.y), 2)));
+                            return distancia;
+                        }
+                        toString() {
+                            return "(" + this.x + "," + this.y + ")";
+                        }
+                    }
+                    const punto = new Punto(4, 3);
+                    const punto2 = new Punto(2, 3);
+                    punto.iguales(punto2);
+                    const punto3 = punto.copia();
+                    console.log(punto3);
+                    const punto4 = punto.suma(punto2);
+                    console.log(punto4);
+                    console.log("La distancia entre los dos puntos es: " + punto.obtenerDistancia(punto2));
+                    console.log(punto.toString());
+                }
+                break;
+            case "2":
+                {
+                    /*2.Añadir un método al prototipo de los arrays, 
+        que devuelva la media aritmética de los elementos de un array.Pruébalo con un par de ejemplos.*/
+
+                    Array.prototype.calcularMedia = function () {
+                        let media = 0;
+                        for (let x = 0; x < this.length; x++) {
+                            media = media + this[x];
+                        }
+                        media = media / this.length;
+                        return media;
+                    }
+                    let x = [4, 5, 6, 7, 8];
+                    console.log(x.calcularMedia());
+                    let a = [4, 4, 3];
+                    console.log(a.calcularMedia());
+                }
+                break;
+            case "3":
+                /*3.Crear un objeto para fracciones y añadir métodos en la clase Math para calcular el mcm y el MCD.
+            Para ello debemos tener en cuenta lo siguiente*/
+                {
+                    class Fraccion {
+                        #numerador;
+                        #denominador;
+                        constructor(numerador = 0, denominador = 0) {
+                            this.#numerador = numerador;
+                            this.#denominador = denominador;
+                        }
+                        getNumerador() {
+                            return this.#numerador;
+                        }
+                        getDenominador() {
+                            return this.#denominador;
+                        }
+                        setNumerador(nuevoNumerador) {
+                            this.#numerador = nuevoNumerador;
+                        }
+                        setDenominador(nuevoDenominador) {
+                            this.#denominador = nuevoDenominador;
+                        }
+                        cambiarFraccion(numerador, denominador) {
+                            this.#numerador = numerador;
+                            this.#denominador = denominador;
+                        }
+                        toString() {
+                            return "(" + this.getNumerador() + "\/" + this.getDenominador() + ")";
+                        }
+                        simplificar() {
+                            let mcd = Math.mcd(this.#numerador, this.#denominador);
+                            this.#numerador /= mcd;
+                            this.#denominador /= mcd;
+                        }
+                        suma(otraFraccion) {
+                            var mcm = Math.MCM(this.#denominador, otraFraccion.getDenominador());
+                            var numeradorCalculado = ((mcm / this.#numerador * this.#denominador) + (mcm / otraFraccion.getDenominador() * otraFraccion.getNumerador()));
+                            var fraccion = new Fraccion(numeradorCalculado, mcm);
+                            fraccion.simplificar();
+                            return fraccion;
+                        }
+                        resta(otraFraccion) {
+                            var mcm = Math.MCM(this.#denominador, otraFraccion.getDenominador());
+                            var numeradorCalculado = ((mcm / this.#numerador * this.#denominador) - (mcm / otraFraccion.getDenominador() * otraFraccion.getNumerador()));
+                            var fraccion = new Fraccion(numeradorCalculado, mcm);
+                            fraccion.simplificar();
+                            return fraccion;
+                        }
+
+                        division(otraFraccion) {
+                            let fraccion = new Fraccion(this.#numerador * otraFraccion.getDenominador(), otraFraccion.getNumerador() * this.#denominador);
+                            fraccion.simplificar();
+                            return fraccion;
+                        }
+
+                        multiplicacion(otraFraccion) {
+                            let fraccion = new Fraccion(this.#numerador * otraFraccion.getNumerador(), this.#denominador * otraFraccion.getDenominador());
+                            fraccion.simplificar();
+                            return fraccion;
+                        }
+
+                    }
+
+                    Math.mcd = function (num1, num2) {
+                        if (num1 % num2 === 0) {
+                            return num2;
+                        }
+                        else {
+                            return Math.mcd(num2, num1 % num2);
+                        }
+                    }
+
+                    Math.MCM = function (num1, num2) {
+                        return num1 * num2 / Math.mcd(num1, num2);
+                    }
+                    const fraccion = new Fraccion(4, 6);
+                    const fraccion2 = new Fraccion(2, 3);
+                    console.log(fraccion.getDenominador());
+                    console.log(fraccion.toString());
+                    console.log(fraccion.suma(fraccion2).toString());
+                    console.log(fraccion.resta(fraccion2).toString());
+                    console.log(fraccion.multiplicacion(fraccion2).toString());
+                    console.log(fraccion.division(fraccion2).toString());
+                }
+                break;
+            case "4":
+                {
+                    /*4.Crea un tipo de objetos que sirvan para representar Cartas. estos objetos tendrán dos propiedades:*/
+
+                    class Carta {
+                        constructor(palo, valor) {
+                            if (valor < 1 || valor > 10 || palo < 1 || palo > 4) {
+                                return null;
+                            } else {
+                                this.palo = palo;
+                                this.valor = valor;
+                            }
+
+                        }
+                        darValor(nPalo, nValor) {
+                            if (valor < 1 || valor > 10 || palo < 1 || palo > 4) {
+                                return "valores o palos Incorrectos";
+                            } else {
+                            this.palo = nPalo;
+                            this.valor = nValor;
+                            }
+                        }
+                        toString() {
+                            let palo = null;
+                            let valor = null;
+
+                            switch (this.valor) {
+                                case 1:
+                                    valor = "As";
+                                    break;
+                                case 8:
+                                    valor = "Sota";
+                                    break;
+                                case 9:
+                                    valor = "Caballo";
+                                    break;
+                                case 10:
+                                    valor = "Rey";
+                                    break;
+                                default:
+                                    valor = this.valor;
+                            }
+
+                            switch (this.palo) {
+                                case 1:
+                                    palo = "Oros";
+                                    break;
+                                case 2:
+                                    palo = "Copas";
+                                    break;
+                                case 3:
+                                    palo = "Espadas";
+                                    break;
+                                case 4:
+                                    palo = "Bastos";
+                                    break;
+                            }
+                            return `${valor} de ${palo}`;
+                        }
+
+                    }
+                    class Baraja {
+                        constructor() {
+                            this.cartas = [];
+                            for (let palo = 1; palo < 5; palo++) {
+                                for (let valor = 1; valor < 11; valor++) {
+                                    this.cartas.push(new Carta(palo, valor));
+                                }
+                            }
+                        }
+                        barajar() {
+                            for (let i = this.cartas.length - 1; i > 0; i--) {
+                                const j = Math.floor(Math.random() * (i + 1));
+                                [this.cartas[i], this.cartas[j]] = [this.cartas[j], this.cartas[i]];
+                            }
+                        }
+                        toString() {
+                            return this.cartas.toString();
+                        }
+                    }
+                    baraja = new Baraja();
+                    baraja.barajar();
+                    console.log(baraja.toString());
+
+                }
+                break;
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aroa Granero Omañas</title>
+</head>
+
+<body>
+    <!--2.Añadir un método al prototipo de los arrays, 
+        que devuelva la media aritmética de los elementos de un array.Pruébalo con un par de ejemplos.-->
+    <script>
+        Array.prototype.calcularMedia = function () {
+            let media = 0;
+            for (let x = 0; x < this.length; x++) {
+                media = media + this[x];
+            }
+            media = media / this.length;
+            return media;
+        }
+        let x = [4, 5, 6, 7, 8];
+        console.log(x.calcularMedia());
+        let a = [4,4,3];
+        console.log(a.calcularMedia());
+    </script>
+
+</body>
+
+</html>

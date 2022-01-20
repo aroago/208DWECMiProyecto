@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AroaGO DOM.3-3</title>
+</head>
+
+<body>
+    <!-- 3.Crea una página que muestre una lista de palabras(unas 10).Las palabras
+         irán apareciendo en la página, una por segundo.Pasados 3 segundos, le 
+         preguntaremos al usuario si quiere que la lista de palabras aparezca ordenado
+         alfabéticamente.Si acepta la sugerencia, reordena las palabras. -->
+
+    <ul id="lista-compra"></ul>
+    <script>
+        window.addEventListener("load", lista);
+
+        function lista() {
+            var compra = new Array("papel", "macarrones", "pescado", "carne", "toallitas", "pan", "zumos", "lejia", "huevos", "harina");
+            var contador = 0;
+            var temp = setInterval(mostrarPalabras, 1000);
+
+            function mostrarPalabras() {
+                var li = document.createElement("li");
+                li.innerHTML = compra[contador];
+                document.querySelector("#lista-compra").appendChild(li);
+                contador++;
+                if (contador == compra.length) {
+                    clearInterval(temp);
+                    setTimeout(ordenarLista, 3000);
+                }
+            }
+            function ordenarLista() {
+                var opcion = confirm("Desea ordenar alfabeticamente la lista?");
+                if (opcion == true) {
+                    compra.sort();
+                    document.querySelector("#lista-compra").innerHTML="";
+                    for (i = 0; i < compra.length; i++) {
+                        var li = document.createElement("li");
+                        li.innerHTML = compra[i];
+                        document.querySelector("#lista-compra").appendChild(li);
+                    }
+                }
+            }
+        }
+
+
+    </script>
+</body>
+
+</html>

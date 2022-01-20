@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AroaGO DOM.3-1</title>
+</head>
+
+<body>
+
+    <script>
+        window.addEventListener("load", inicio);
+        function inicio() {
+            nParrafo = prompt("Introduce tu texto: ");
+            posicion = parseInt(prompt("En que posicion lo quieres:"));
+            while (posicion < 0 || posicion > 10) {
+                posicion = parseInt(prompt(`Error,Tiene que ser un numero positivo 1- 10)`));
+            }
+
+            let li = document.getElementsByTagName("li");
+            let nuevoP = document.createElement("li");
+            nuevoP.innerHTML = `<strong>${nParrafo}</strong>`;
+            let ol = document.getElementsByTagName("ol");
+            let post = li[posicion - 1];
+            ol[0].insertBefore(nuevoP, post);
+        }
+
+
+    </script>
+    <ol>
+        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur repudiandae exercitationem illum, est
+            dignissimos, voluptatibus repellendus ipsum fugiat nesciunt sapiente natus aut? Ut aliquam facilis odit
+            voluptate soluta dolor assumenda.</li>
+        <li>Eveniet delectus ratione recusandae sit reiciendis illum voluptates, magni quaerat non dolor commodi
+            corporis a, doloremque dicta ab nam labore adipisci! Explicabo amet velit eum numquam necessitatibus labore
+            laudantium alias.</li>
+        <li>Architecto nihil reiciendis, assumenda reprehenderit delectus dolorem, expedita, sint nam repellendus iure
+            temporibus ipsa? Possimus recusandae vitae modi accusamus, et dolor delectus! Labore voluptas natus rem hic
+            consequatur veritatis minus.</li>
+        <li>Eos eveniet dolorem aliquid perspiciatis incidunt ipsum, fuga explicabo voluptates sed dignissimos, saepe
+            reiciendis ea debitis vel ratione aliquam ut maxime illo atque voluptate. Cupiditate veritatis expedita ex
+            optio harum!</li>
+        <li>Placeat eligendi dolor deleniti blanditiis, magnam autem fuga esse perferendis facere cum, vero dignissimos
+            maiores laboriosam ad minus nemo eos omnis perspiciatis asperiores tenetur commodi odit! At vitae alias
+            recusandae.</li>
+        <li>Sapiente sint expedita laboriosam ipsum quidem, accusantium autem reiciendis commodi minus dolorem impedit
+            in labore vel dolore quis, nemo doloremque, culpa est aut illo et hic distinctio quasi obcaecati.
+            Voluptatum.</li>
+        <li>Necessitatibus dicta excepturi dolorum, officiis odio nobis quasi similique ipsa deleniti nam repellat
+            nesciunt ullam. Illo officiis dicta culpa magni eaque ratione architecto nam, blanditiis animi numquam.
+            Distinctio, quia adipisci!</li>
+        <li>Molestiae, minus quisquam. Cupiditate, deserunt autem! Rem ipsam magni totam laudantium sunt animi ab
+            expedita aliquid, natus quaerat beatae id odio temporibus voluptate. Laborum, obcaecati placeat a delectus
+            quisquam exercitationem.</li>
+        <li>Veritatis vel necessitatibus libero consequuntur accusantium laboriosam quasi, maiores officia nemo velit
+            omnis quis ut, sapiente iste. Omnis, atque quam. Neque numquam animi inventore iste nemo, maxime laborum
+            unde rerum?</li>
+    </ol>
+</body>
+
+</html>

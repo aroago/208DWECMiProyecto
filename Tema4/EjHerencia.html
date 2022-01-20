@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Ordenadores{
+            constructor(marca=null,modelo=null,memoriaRam=4,capDisco=512,pulgadasPantalla=17){
+              this.marca=marca;
+              this.modelo=modelo;
+              this.memoriaRam=memoriaRam;
+              this.capDisco=capDisco;
+              this.pulgadasPantalla=pulgadasPantalla;  
+            }
+
+            toString(){
+                return `Marca: ${this.marca}, Modelo:${this.modelo}, Memoria Ram: ${this.memoriaRam}GB, 
+                \nCapacidad Disco Duro: ${this.capDisco}GB, Pulgadas Pantalla: ${this.pulgadasPantalla} `;
+            }
+
+        }
+        class Portatiles extends Ordenadores{
+
+            constructor(marca,modelo,memoriaRam=null,capDisco=256,pulgadasPantalla=12,autonomia=4){
+                super(marca,modelo,memoriaRam,capDisco,pulgadasPantalla);
+                this.autonomia=autonomia;
+            }
+            toString(){
+                return `${super.toString()},
+              \nAutonomia: ${this.autonomia}h `;
+            }
+        }
+        var coche=new Ordenadores("ViewSonic","viejo");
+        console.log(coche.toString());
+        var portatil=new Portatiles("ipad");
+        console.log(portatil.toString());
+    </script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="author" content="aroaGraneroOmañas">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/estilo.css" type="text/css" title="Default style">
+    <title>p1</title>
+    <!--JavaScript-->
+    <!--<script>
+        console.log("Hola Mundo"); 
+        alert("Bueno dias");
+    </script>-->
+</head>
+
+<body>
+    <h1>Mi primer proyecto VC</h1>
+    <p>Hoy es mi primer dia de Clase WIII</p>
+    <!--integrity=""(verificar que el achivo externo sea al original y no haya sido modificado) 
+        async=true 
+        defer=false
+        (Añadir Archivo externo) type="JavaScript" src="miCodigo.js"
+    -->
+    <script>
+        var nombre = "Aroa"; //Variable type String.
+        var apellido = "Granero";
+        {
+            const name="Molina";//Constant Variable
+            let apellido = "Granero";/*Variable Type String.*/
+            console.log(apellido);
+        }
+
+        console.log(nombre);//agrupar bloques de sentencia
+        var x=7;
+        function f(){
+            var x=2;
+        }
+        console.log(x);
+//number
+        var num=6.5e+23;//6.5*10e23
+        var hexa=0xAB12;//0x para numeros hexadecimales
+        var oct=0o27451;//0o para numeros en octal
+        var bin=0b1110;//0b para numeros en binario
+        
+        var infinito=1/0;//return Infinity
+        var y=Infinity;//Text Infinity
+        var raro="hola"*3;//return NaN
+        console.log(raro);
+//String
+        var texto1="Primer \"texto\"";
+        var texto2='Segundo "Texto"';
+        console.log("Yo me llamo "+nombre+" y mi Apellido es "+apellido);
+        console.log(`Yo me llamo ${nombre} y mi Apellido es ${apellido}`);
+        console.log(`El resultado \n de 3+3 son= ${3+3}`);// \n line break
+        console.log(' \"hola'); //inverted line to show a character.
+        console.log("Esto es un simbolo \u{1F48b} \u{1F483} \u{1F61A}"); //symbols
+//boolean
+        let a=9;
+        let b=10;
+        let c=(a>b);
+        console.log(c);//return false
+        console.log(Boolean(true));//reurn true
+        console.log(Boolean(1));//return true
+        console.log(Boolean(0));//return false
+        console.log(Boolean("hola"));//return true
+        console.log(Boolean(""));//return false
+        console.log(Boolean(NaN));//return false
+        console.log(Boolean(undefined));//return false
+        console.log(Boolean(Infinity));//return true
+        console.log(Boolean(null));//return false
+//arithmetical operators
+        console.log(5+5+3.25);//sum
+        console.log("hola "+9);//return hola 9
+        console.log(5*9);//multiply
+        console.log(5%9);//rest
+        console.log(5**9);//the exponent
+        console.log(5==4);//To Compare
+        console.log(5!=4);//Distint
+        console.log(5!==4);//Distint Strict
+        console.log(5>=4);//Compare
+        console.log("saco">"saca");//retun true
+        console.log("2"==2);//retunt true
+        console.log("2"===2);//retunt false Strict
+        console.log("true"==true);//return false
+//operators and ,or,not
+        let g=1;
+        let o=2;
+        console.log(g==1 && o==2);//return true
+        console.log(g==1 || o==4);//return true
+        console.log(!(g==0 || o==4));//return true
+//operadores de incrementacion
+        var u=2;
+        var v=2;
+        let incremento;
+        incremento=u++;//x=3 Incremento=2
+        incremento2=++v;//v=3 Incremento2=3
+        console.log("Incremento= "+incremento);
+        console.log("Incremento= "+incremento2);
+//if mediante un operador
+        let tipo;
+        let numero=12;
+        tipo=(numero%2==0) ? "par" : "Impar";
+        console.log(tipo);
+
+//mensajes
+       /* var nombre=prompt("Introduce tu Nombre: ","xxxx");
+        let aviso="primer aviso";
+        alert(`Wake up  ${nombre} !!!  ${aviso} \u{1F48b}`);
+        let resultado= confirm("Estas seguro que no te levantas?");
+        alert(resultado);*/
+ //secuencias de control 
+        let aprobados=0; 
+        let suspensos=0;
+        let nota=prompt("Introduce tu nota: ");     
+        if(nota>=5){
+            alert("Aprobado");
+            aprobados++;
+        }else{
+            alert("Suspenso");
+            suspensos++;
+        }
+        alert(`Alumnos aprobados: ${aprobados}`);
+        alert(`Alumnos Suspensos: ${suspensos}`);
+        for(let i=0;i<=10;i++){
+        console.log(i);
+
+        }
+//Random
+        console.log(ParseInt(Math.random()*11));
+        
+        let max=6,min=4;
+        console.log(ParseInt(Math.random()*(max-min+1)+min)); 
+
+        document.write("<h1>Vamos a hacer un primer Ejercicio</h1>");
+
+    </script>
+</body>
+
+</html>

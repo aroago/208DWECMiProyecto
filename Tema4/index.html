@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--Aroa Granero Omañas-->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expresiones Regulares</title>
+    <style>
+        span {
+            color: cadetblue;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        let key = prompt("1.Validar CP \n 2.Validar un fichero pdf o docx \n 3.Validar NIF \n Introduce un numero de Ejercicio: ");
+
+        switch (key) {
+            case "1":
+                /*1.Crea un script que valide un código postal (formado por 5 números del 00000 al 52999).*/
+                {
+                    var validarCP = /^(?:0[0-9]|[0-4]\d|5[0-2])\d{3}$/;
+
+                    var cp = prompt("Introduce un Codigo Postal");
+                    if (validarCP.test(cp)) {
+                        alert("CP VALIDO");
+                    } else {
+                        alert("CP NO VALIDO")
+                    }
+                }
+                break;
+            case "2":
+                /*2.Crea un script para validar que un documento recibido tenga formato pdf o docx.*/
+                {
+                    var validarFinal = /\.(pdf|docx)$/;
+                    var documento = prompt("Introduce un documento");
+                    if (validarFinal.test(documento)) {
+                        alert("DOCUMENTO VALIDO");
+                    } else {
+                        alert("DOCUMENTO NO VALIDO")
+                    }
+                    break;
+                }
+            case "3":
+                /* Crea una aplicación web que sirva para validar NIF sindicando si es correcto o no. 
+                Un NIF consta de una posible primera letra que puede ser X, Y o Z. Si no tiene letra 
+                llevará un número. A continuación,habrá 7 números más. Y finalmente una letra que cumple
+                formula:
+                 •La fórmula de la letra consiste en dividir los números del NIF entre 23 y
+                tomar el resto. Para hacer este cálculo cuando el NIF empieza por una letra, se cambia 
+                la letra por un número. Si la primera letra del NIF es una X, se cambia por el número 0, la Y por 1 y la Z por 2.
+                El resultado obtenido se comprueba con la siguiente tabla:*/
+                {
+                    var dni=prompt("Introduce tu DNI: ");
+                    validarDNI(dni);
+                    function validarDNI(dni) {
+                        var numero, letraDni, letra;
+                        var expresion_regular_dni = /^[XYZ]?\d{5,8}[A-Z]$/;
+
+                        dni = dni.toUpperCase();
+
+                        if (expresion_regular_dni.test(dni) === true) {
+                            numero = dni.substr(0, dni.length - 1);
+                            numero = numero.replace('X', 0);
+                            numero = numero.replace('Y', 1);
+                            numero = numero.replace('Z', 2);
+                            letraDni = dni.substr(dni.length - 1, 1);
+                            numero = numero % 23;
+                            letra = 'TRWAGMYFPDXBNJZSQVHLCKET';
+                            letra = letra.substring(numero, numero + 1);
+                            if (letra != letraDni) {
+                                alert('Dni Incorrecto, la letra del NIF no Coincide');
+                              
+                            } else {
+                                alert('Dni Correcto');
+                            }
+                        } else {
+                            alert('Dni Incorrecto, formato no válido');
+                        }
+                        
+                    }
+                    break;
+                }
+        }
+
+
+
+    </script>
+
+</body>
+
+</html>

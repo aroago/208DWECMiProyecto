@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!--4.Crea un tipo de objetos que sirvan para representar Cartas. estos objetos tendrán dos propiedades:-->
+    <script>
+        class Carta {
+            constructor(palo, valor) {
+                if (valor < 1 || valor > 10 || palo < 1 || palo > 4) {
+                    return null;
+                }
+                this.palo = palo;
+                this.valor = valor;
+            }
+            darValor(nPalo, nValor) {
+                this.palo = nPalo;
+                this.valor = nValor;
+            }
+            toString() {
+                let palo = null;
+                let valor = null;
+                
+                switch (this.valor) {
+                    case 1:
+                        valor = "As";
+                        break;
+                    case 8:
+                        valor = "Sota";
+                        break;
+                    case 9:
+                        valor = "Caballo";
+                        break;
+                    case 10:
+                        valor = "Rey";
+                        break;
+                    default:
+                        valor = this.valor;
+                }
+
+                switch(this.palo){
+                    case 1:
+                        palo = "Oros";
+                        break;
+                    case 2:
+                        palo = "Copas";
+                        break;
+                    case 3:
+                        palo = "Espadas";
+                        break;
+                    case 4:
+                        palo = "Bastos";
+                        break;
+                }
+                
+                return `${valor} de ${palo}`;
+            }
+
+        }
+        class Baraja{
+
+            constructor() {
+                this.cartas = [];
+                for (let palo = 1; palo < 5; palo++) {
+                    for (let valor = 1; valor < 11; valor++) {
+                        this.cartas.push(new Carta(palo, valor));
+                    }
+                }
+            }
+            barajar() {
+                for (let i = this.cartas.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [this.cartas[i], this.cartas[j]] = [this.cartas[j], this.cartas[i]];
+                }
+            }
+            toString(){
+                return this.cartas.toString();
+            }
+        }
+        baraja = new Baraja();
+        baraja.barajar();
+        console.log(baraja.toString());
+    </script>
+</body>
+
+</html>

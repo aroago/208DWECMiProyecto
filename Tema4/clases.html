@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Persona{
+            nacimiento=2001;
+            constructor(n="Aroa",a="Granero"){
+                this.nombre=n;
+                this.apellido=a;
+            }
+            saludar(){
+                console.log("Hola, naciste en "+this.nacimiento);
+            }
+        }
+        const p1=new Persona();
+        console.log(p1.nombre+" "+p1.apellido);
+        p1.saludar();
+
+//herencias
+        class Vehiculo {
+            velocidad=0;
+            constructor(mar,mod){
+                this.marca=mar;
+                this.modelo=mod;
+            }
+            acelerar(){
+                this.velocidad+=10;
+            }
+        }
+        class Camion extends Vehiculo{
+            constructor(mar,mod){
+                super(mar,mod);
+                this.carga=0;
+            }
+            cargar(kilosDeCarga){
+                this.carga+=kilosDeCarga;
+            }
+        }
+        class Moto extends Vehiculo{
+            
+            constructor(mar,mod,sidecar){
+                super(mar,mod);
+                this.sidecar=sidecar;
+            }
+            hacerCaballito(){
+                if(this.sidecar){
+                    console.log("No se puede hacer acaballito");
+                }else{
+                    console.log("Puede hacer caballito");
+                }
+            }
+        }
+        const miMoto=new Moto("Honda","CBR",false);
+        const miCamion= new Camion("Iveco","650T");
+        console.log("Tengo Una Moto "+miMoto.marca+" "+miMoto.modelo);
+
+    </script>
+</body>
+</html>

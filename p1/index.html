@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table,
+        td,
+        th {
+            border: darkcyan solid 2px;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        /*   
+          document.write("<table>");
+           for(let i=0;i<10;i++){
+               document.write("<tr></tr>");
+               for(let j=0;j<6;j++){
+                   document.write("<td>adios</td>");
+               }
+           }
+           document.write("</table>");
+       */
+
+        // let notas = [10, 2, 6, "Juan"];
+        //let dias = new Array("lunes", "martes");
+        //alert(notas);
+
+
+        
+        var cadena=prompt("Introduce una cadena de texto: ");
+        let contador = 0;
+        for (let x of cadena) {
+            if (x == "a" ||x== "e" ||x== "i" ||x== "o" ||x== "u" || x == "A" ||x== "E" ||x== "I" ||x== "O" ||x== "U" ) {
+                contador += 1;
+            }
+        }
+        alert(`las vocales dentro de la ${cadena} son: ${contador}`);
+       /*
+         for (let x of cadena) {
+             if (x != undefined) {
+                 console.log(x);
+             }
+         }
+         */
+    </script>
+</body>
+
+</html>

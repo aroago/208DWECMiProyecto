@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        span {
+            color: cadetblue;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        let key = prompt("1.Cifrar Texto \n 2.Detectar Palindromos \n 3.Detectar Anagramas \n Introduce un numero de Ejercicio: ");
+
+        switch (key) {
+            case "1":
+                /*1.Creauna página que pida al usuario un texto y una clave numérica y cifre el texto con la clave pasada. Para ello se deberá desplazar 
+                el código de cada carácter tantas posiciones como nos indique la clave. Por ejemplo, texto:“Alberto”,clave: “2”, texto cifrado: “Cndgtvq”.*/
+                {
+                    var cadena = prompt("Introcuce un texto:");
+                    var clave = parseInt(prompt("Introcuce una clave:"));
+                    var contrasena = " ";
+
+                    for (let i = 0; i < cadena.length; i++) {
+                        var caracter = cadena.charCodeAt(i);
+                        var cifrado = caracter + clave;
+                        contrasena = contrasena + String.fromCharCode(cifrado);
+
+                    }
+
+                    document.write(`<h1>Clave cifrada: ${contrasena} </h1>`);
+
+                }
+                break;
+            case "2":
+                /*2.Crea una función para detectar palíndromos. La función recibirá un texto y devolverá verdadero o falso en función de si el texto es o no es palíndromo.
+                 Hay que tener en cuenta que se deben ignorar los signos de puntuación, espacios, interrogaciones, paréntesis,etc., tambiénse ignoran tildes y diéresis y 
+                 no se distingue entre mayúsculas y minúsculas.*/
+                {
+
+                    function esPalidroma(cadena) {
+                        cadena.trim();
+                        cadena.toLocaleLowerCase();
+                        //var cadena1= cadena.replace(/[*-_!¡?¿$%&|@#~¬+-{}¨<>^]/gi, "");
+                        var cadena2 = "";
+                        do {
+                            cadena2 = cadena;
+                            cadena.replace("á", "a");
+                            cadena.replace("é", "e");
+                            cadena.replace("í", "i");
+                            cadena.replace("ó", "o");
+                            cadena.replace("ú", "u");
+                            cadena.replace("à", "a");
+                            cadena.replace("è", "e");
+                            cadena.replace("í", "i");
+                            cadena.replace("ó", "o");
+                            cadena.replace("ù", "u");
+                        } while (cadena != cadena2);
+                        cadena = cadena2;
+                        var reves = "";
+                        for (let i = cadena.length; i >= 0; i--) {
+                            reves += cadena.charAt(i);
+                        }
+                        if (cadena == reves) {
+                            return document.write(`<h2>La palabra <span>\"${cadena}\"</span> SI es Palindroma </h2>`);
+                        }
+                        else {
+                            return document.write(`<h2>La palabra <span>\"${cadena}\"</span> NO es Palindroma </h2>`);
+                        }
+                    }
+                    var cadena = prompt("Introcuce un texto:");
+                    esPalidroma(cadena);
+                    break;
+                }
+            case "3":
+                /*3.Crea una función para detectar anagramas. Un anagrama es una palabra que resulta de transponer 
+                las letras de otra, por ejemplo: “SENTIDO”y “DESTINO”. La función recibirá como mínimo dos palabras,
+                aunque puede recibir más y devolverá verdadero o falso en función de si las palabras son anagramas
+                de las  mismas letras. */
+                {
+                    //con DOS palabras:
+                    /* function anagramasDetect(palabra1new, palabra2new) {
+                         var palabra1 = palabra1new;
+                         var palabra2 = palabra2new;
+ 
+                         if (palabra1.length != palabra2.length) {
+                             return document.write(`La palabra <span>\" ${palabra1} \"</span> y la palabra <span>\" ${palabra2}\"</span> NO son Anagramas`)
+                         } else {
+                             // Cambiar a minúsculas ambas cadenas
+                             palabra1 = palabra1.toLowerCase();
+                             palabra2 = palabra2.toLowerCase();
+ 
+                             // Convertir ambas cadenas en caracteres
+                             palabra1 = palabra1.split("");
+                             palabra2 = palabra2.split("");
+ 
+                             // Ordenar esos caracteres
+                             palabra1 = palabra1.sort();
+                             palabra2 = palabra2.sort();
+ 
+                             // Una vez ordenados, los convertimos a cadena nuevamente
+                             palabra1 = palabra1.join("");
+                             palabra2 = palabra2.join("");
+ 
+                             // Finalmente comparamos
+ 
+                             if (palabra1 === palabra2) {
+                                 return document.write(`La palabra <span>\" ${palabra1new} \"</span> y la palabra <span>\" ${palabra2new}\"</span> SI son Anagramas`);
+                             } else {
+                                 return document.write(`La palabra <span>\" ${palabra1new} \"<span> y la palabra <span>\" ${palabranew}\"</span> NO son Anagramas`);
+                             }
+                         }
+                         var palabra1 = prompt("Introcuce una palabra:");
+                         var palabra2 = prompt("Introduce otra palabra");
+                         anagramasDetect(palabra1, palabra2);*/
+
+                   
+
+                    function anagramasDetect(palabrasArray) {
+                        let esAnagrama = true;
+                        palabrasArray = palabrasArray.sort();
+                        palabra1 = palabrasArray.shift();
+                        palabra1 = ordenarCaracteresALF(palabra1);
+
+                        for (palabra of palabrasArray) {
+                            palabra = ordenarCaracteresALF(palabra);
+                            if (palabra1 !== palabra) {
+                                esAnagrama = false;
+                                break;
+                            }
+                        }
+
+                        return esAnagrama;
+                    }
+                    function ordenarCaracteresALF(palabra) {
+                        palabra = palabra.toLowerCase();
+                        palabra = palabra.split("");
+                        palabra = palabra.sort();
+                        palabra = palabra.join("");
+                        return palabra;
+                    }
+
+                    var palabrasArray = [];
+                    do {
+                        palabra = prompt("Introdúzcase una palabra");
+                        if (palabra) {
+                            palabrasArray.push(palabra);
+                        }
+                    } while (palabra != null);
+                    document.write("<div>Las palabras ");
+                    for (palabra of palabrasArray) {
+                        document.write("<span>" + palabra + "</span> ");
+                    }
+                    if (anagramasDetect(palabrasArray)) {
+                        document.write("SI son anagramas entre sí.</div>");
+                    }
+                    else {
+                        document.write("NO son anagramas entre sí.</div>");
+                    }
+                    break;
+                }
+        }
+
+
+
+    </script>
+
+</body>
+
+</html>

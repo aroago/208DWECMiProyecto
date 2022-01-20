@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aroa Granero Omañas</title>
+</head>
+
+<body>
+    <script>
+        class Punto {
+            constructor(x= 0, y= 0) {
+                this.x = x;
+                this.y = y;
+            }
+            cambiar(n1, n2) {
+                this.x = n1;
+                this.y = n2;
+            }
+            copia() {
+                return new Punto(this.x, this.y);
+            }
+            iguales(otroPunto) {
+                if (this.x == otroPunto.x && this.y == otroPunto.y) {
+                    console.log("Son iguales");
+                } else {
+                    console.log("No son iguales");
+                }
+            }
+            suma(puntoSumar) {
+                if (puntoSumar instanceof Punto) {
+                    return new Punto(this.x + puntoSumar.x, this.y + puntoSumar.y);
+                } else {
+                    return this;
+                }
+            }
+            obtenerDistancia(puntoDistancia) {
+                let distancia = Math.sqrt(Math.pow((puntoDistancia.x - this.x), 2) + (Math.pow((puntoDistancia.y - this.y), 2)));
+                return distancia;
+            }
+            toString() {
+                return "(" + this.x + "," + this.y + ")";
+            }
+        }
+        const punto = new Punto(4, 3);
+        const punto2 = new Punto(2, 3);
+        punto.iguales(punto2);
+        const punto3 = punto.copia();
+        console.log(punto3);
+        const punto4 = punto.suma(punto2);
+        console.log(punto4);
+        console.log("La distancia entre los dos puntos es: " + punto.obtenerDistancia(punto2));
+        console.log(punto.toString());
+    </script>
+
+</body>
+
+</html>

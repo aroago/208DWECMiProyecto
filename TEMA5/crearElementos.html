@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .miClase{
+            background-color: rgb(246, 169, 67);
+            color: cornsilk;
+        }
+        .colTexto{
+            background-color:cadetblue;
+            color: rgb(178, 236, 236);
+        }
+    </style>
+</head>
+<body>
+    <section id="s1">
+        <h1>DOM</h1>
+        <p id="p1">Ejemplo</p>
+    </section>
+    <section id="s2">
+        <h1 class="miClase colTexto">HOLA</h1>
+        <p id="p1">Ejemplo2</p>
+    </section>
+    <script>
+        //crear elementos
+        let nuevoP= document.createElement("p");
+        nuevoP.innerHTML="Hola Nuevo Parrafo";
+        
+        let sec=document.getElementById("s1");
+        sec.appendChild(nuevoP);
+
+        let nuevoT=document.createTextNode("Nuevo Nodo De Texto");
+        sec.appendChild(nuevoT);
+        
+        let posterior=sec.lastElementChild;
+        sec.insertBefore(nuevoT,posterior);
+        
+        //let sustituir=sec.children[1];
+        //let sustituido=sec.replaceChild(nuevoP,sustituir);
+        //document.getElementById("s2").appendChild(sustituido);
+
+        //sec.removeChild(sec.firstElementChild);
+        //let elementosP=document.getElementsByTagName("p");
+        //console.log("Antes de eliminar:"+elementosP.length);
+        //document.getElementById("s1").removeChild(document.getElementById("p1"));
+        //console.log("Despues de borrar: "+elementosP.length);
+
+        let titulos=document.getElementsByTagName("h1");
+        titulos[0].className="miClase";
+        //titulos[1].setAttribute("class","colTexto");
+        titulos[0].style.backgroundColor="grey";
+        console.log(titulos[0].className);
+        let cssTitulo=window.getComputedStyle(titulos[0]);
+        console.log(cssTitulo);
+
+        console.log(titulos[1].classList);
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AroaGO DOM.3-4</title>
+    <style>
+        html{
+            width: 95vw;
+            height: 100%;
+            font-size: 100px;
+            background-color: rgb(0, 0, 0);
+            display: grid;
+            justify-items: center;
+            align-items: center;
+            
+        }
+    </style>
+</head>
+
+<body>
+    <section id="s1">
+    </section>
+    <script>
+        window.addEventListener("load", nuevoReloj);
+        function nuevoReloj() {
+            document.querySelector("#s1").innerHTML="";
+            momentoActual = new Date();
+            hora = momentoActual.getHours();
+            minuto = momentoActual.getMinutes();
+            segundo = momentoActual.getSeconds();
+
+            hora1=parseInt(hora/10);
+            hora2=hora%10;
+
+            minuto1=parseInt(minuto/10);
+            minuto2=minuto%10;
+
+            segundo1=parseInt(segundo/10);
+            segundo2=segundo%10;
+
+
+            crearImagen(hora1)+crearImagen(hora2) + crearImagen("puntos") + crearImagen(minuto1)+crearImagen(minuto2)+ crearImagen("puntos") +crearImagen(segundo1)+crearImagen(segundo2);     
+        }
+        setInterval("nuevoReloj()",1000);
+
+        function crearImagen(numero) {
+            var img = document.createElement("img");
+            img.setAttribute("src",`${numero}.png`);
+            img.width="100";
+            img.height="100";
+            img.alt = ` ${numero}`;
+            var src = document.getElementById("s1");
+            src.appendChild(img);
+        }
+    </script>
+</body>
+
+</html>
