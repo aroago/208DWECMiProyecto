@@ -5,9 +5,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eventos</title>
+    <style>
+        div{
+            background-color: burlywood;
+            width: 20%;
+            height: 60%;
+        }
+        p{
+            background-color: cadetblue;
+            width: 30%;
+            height: 50%;
+        }
+        button{
+            background-color: crimson;
+        }
+    </style>
 </head>
 <body>
-    <section id="s1">
+    <!-- <section id="s1">
         <h1 onclick="alert('Pincha Aquí')">DOM</h1>
         <p id="p1">Ejemplo</p>
     </section>
@@ -22,6 +37,38 @@
         let h1=document.getElementsByTagName("h1")[0];
         h1.addEventListener("click",()=>{alert("Click")});
 
+    </script> -->
+    <!-- <div>
+        <p>
+            <button>CLIK</button>
+        </p>
+    </div>
+    
+    <script>
+        let capa=document.querySelector("div");
+        let parrafo=document.querySelector("p");
+        let boton=document.querySelector("button");
+        capa.addEventListener("click",()=>{console.log("capa Pulsado")},true);
+       parrafo.addEventListener("click",()=>{console.log("parrafo Pulsado")},true);
+        boton.addEventListener("click",mensaje);
+        function mensaje() {
+            alert("Ha pulsado el Boton");
+            boton.removeEventListener("click",mensaje);
+        }
+    </script> -->
+    <p>hola</p>
+    <p>adios</p>
+    <p>hata Luego</p>
+    <p>bye</p>
+    <script>
+      let listaP=document.getElementsByTagName("p");
+      for(let parrafo of listaP){
+          parrafo.addEventListener("click",mostrarContenido)
+      }
+       function mostrarContenido(evento) {
+          alert(evento.target.textContent);
+          console.log();
+       }
     </script>
 </body>
 </html>
