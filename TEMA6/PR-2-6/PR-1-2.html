@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <style>
+    #droptarget {
+      float: left;
+      width: 200px;
+      height: 100px;
+      margin: 15px;
+      margin-right: 100px;
+      padding: 10px;
+      background: rgb(255, 255, 255);
+      border: 1px solid #050505;
+    }
+
+    #droptarget1 {
+      float: left;
+      width: 200px;
+      height: 100px;
+      margin: 15px;
+      margin-right: 100px;
+      padding: 10px;
+      background: rgb(241, 245, 0);
+      border: 1px solid #050505;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="droptarget1" draggable="true">
+    <p>Soy Arrastrable</p>
+  </div>
+
+  <div id="droptarget" draggable="true">
+    <p>Soy El Destino</p>
+  </div>
+
+
+  <script>
+    var capa1 = document.getElementById("droptarget1");
+    var capa2 = document.getElementById("droptarget");
+
+    capa1.addEventListener("drag",(ev)=> {
+      capa1.target.style.opacity = "0.5";
+    });
+    capa1.addEventListener("dragend",(ev)=> {
+      capa1.target.style.opacity = "1";
+      capa1.style.background="yellow";
+    });
+    capa2.addEventListener("dragenter",(ev)=> {
+      capa2.style.background="red";
+    });
+    capa2.addEventListener("dragleave", (ev) => {
+      capa2.style.backgroundColor = "transparent";
+    });
+    capa2.addEventListener("dragover", (ev) => {
+      ev.preventDefault();
+    });
+    capa2.addEventListener("drop", (ev) => {
+      document.body.removeChild(capa1);
+      capa2.textContent="Lo has logrado";
+      capa2.style.background="yellow";
+    });
+  </script>
+
+</body>
+
+</html>

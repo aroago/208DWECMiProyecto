@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>velocidad</title>
+</head>
+
+<body>
+    <div id="contador">
+        <p>velocidad=<strong id="p1">0</strong></p>
+    </div>
+    <script>
+        var strong = document.getElementById('p1');
+
+        var velocidad = 0;
+        window.addEventListener("keydown", tecla);
+        function tecla(evento) {
+            if (evento.key == "ArrowUp" && velocidad < 120) {
+                strong.textContent = ++velocidad;
+            } else if (evento.key == "ArrowDown" && velocidad > 0) {
+
+                strong.textContent = --velocidad;
+            }
+        }
+
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        'use strict'
+        let x = 2;
+        let miError = new Error("Error,deve ser un texto");
+        if (!isNaN(x)) {
+            throw miError;
+        }
+        console.log(x);
+
+        let miPromesa = new Promise(function (resolve, reject) {
+            //codigo de mi tarea Asincrona
+            throw new Error("La he liado parda");
+            let x = 1;
+            let y = 1;
+
+            //condicion que determinara si la promesa si ha cumplido o no
+            if (x == y) {
+                //si se cumple - resolve(resultados)
+                resolve("los numeros son iguales");
+            } else {
+                //si no se cumple-reject(error)
+                reject("los numeros son distintos");
+            }
+            miPromesa.then((resultado) => console.log(resultado))
+                .catch((error) => console.log(error));
+
+        })
+        miPromesa.then((resultado) => {
+            console.log(resultado);
+            return Promise.reject(Error("No quiero encadenar then"));
+        })
+
+        let promesa2 = Promise.resolve("estoy resuelta");
+        let promesa3 = new Promise((resolve) => {
+            setTimeout(() => { resolve("Resuelto en 3 segundos") }, 3000);
+        });
+        let promesa4 = new Promise((resolve) => {
+            setTimeout(() => { resolve("Resuelto en 6 segundos") }, 6000);
+        });
+
+        let miPromesaConjunta = Promise.all([miPromesa, promesa2, promesa3, promesa4]);
+
+        miPromesaConjunta.then((resultados) => {
+            let cont = 1;
+            for (let res of resultado) {
+                console.log(`resultado de la promesa numero ${cont}: ${res}`);
+            }
+        });
+
+        async function valorNumerico() {
+            return 87;
+        }
+        async function inicio() {
+            let valor = valorNumerico();
+            console.log(valor);
+            let valor1 = await valornumerico();
+            console.log(valor1);
+        }
+        inicio();
+    </script>
+</body>
+
+</html>

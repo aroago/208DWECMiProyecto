@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html {
+            font-family: 'Courier New';
+            background-color: rgb(200, 218, 206);
+        }
+
+        h1 {
+            color: teal;
+            text-align: center;
+        }
+
+        form {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        input {
+            border: crimson 2px thick;
+            border-radius: 5px 0px 0px 5px;
+            height: 24px;
+            width: 50%;
+        }
+
+        #botton {
+            color: white;
+            background-color: brown;
+            border-radius: 0px 5px 5px 0px;
+            height: 30px;
+            width: 60px;
+            border: none;
+            font-weight: bold;
+            font-size: 20px;
+
+        }
+
+        ul {
+            color: rgb(8, 145, 149);
+        }
+        li{
+            font-size: 30px;
+        }
+        #deleteLi{
+            background-color: red;
+            color: white;
+            border-radius: 15px;
+           padding: 5px;
+            font-size: 15px;
+            margin-left: 20px;
+            
+        }
+        #botton:hover{
+            background-color: darkcyan;
+        }
+        #deleteLi:hover{
+            background-color: rgb(102, 21, 36);
+          
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Lista de tareas</h1>
+        <form method="POST">
+            <input type="text" id="Addtext">
+            <button type="button" id="botton">+</button>
+        </form>
+        <ul id="listaDesordenada">
+        </ul>
+    </div>
+    <script>
+
+        var botonAdd = document.getElementById("botton");
+        var li=document.getElementsByTagName("li");
+        botonAdd.addEventListener("click", (ev) => {
+            ev.preventDefault();
+            addTask();
+        });
+
+        function addTask() {
+            var text = document.getElementById("Addtext").value;
+            if (text.length > 0) {
+                var newli = document.createElement('li');
+                newli.id = text;
+                newli.innerHTML = text+"<span id='deleteLi' onclick='deleteLi(this)'>quitar</span>" ;
+                document.getElementById("listaDesordenada").appendChild(newli);
+                newli.addEventListener("click",up);
+                // newli.addEventListener("click",deleteLi);
+            }
+            return false;
+        }
+        function up(ev) {
+            document.getElementById("listaDesordenada").insertBefore(ev.target,li[0]);
+        }
+        function deleteLi(elemento) {
+            // document.getElementById("listaDesordenada").removeChild(elemento.target.parentElement);
+            // elemento.stopPropagation();
+            var id = elemento.parentNode.getAttribute("id");
+            node = document.getElementById(id);
+            node.parentNode.removeChild(node);
+        }
+    </script>
+</body>
+
+</html>
