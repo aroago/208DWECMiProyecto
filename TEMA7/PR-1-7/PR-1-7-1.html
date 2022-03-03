@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #contenedorTexto{
+            display: flex;
+            align-items:center;
+            flex-flow: column;
+        }
+        input{
+            width: 300px;
+            height: 20px;
+        }
+        #textoCargado{
+            display: none;
+        }
+        button{
+            width: 300px;
+            height: 30px;
+            margin: 3px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="contenedorTexto">
+       Nombre del fichero: <input type="text" id="textoIntroducido" name="texto"/>
+       Contenido del Fichero: <input type="text" id="textoCargado" name="texto" disabled/>
+        <button type="button" onclick="loadDoc()">Cargar texto</button>
+        <button type="button" onclick="borrarContenido()">Borrar contenido</button>
+    </div>
+    <script>
+       
+        function loadDoc() {
+            var xhttp = new XMLHttpRequest();
+            var textoCargado=document.getElementById("textoCargado");
+            var input=document.getElementById("textoIntroducido").value;
+            // xhttp.onreadystatechange = function () {
+            //     if (this.readyState == 4 && this.status == 200) {
+            //         textoCargado.value = xhttp.responseText;
+                     
+            //     }else{
+            //         textoCargado.value ="File not Found";
+            //     }
+            // };
+            // xhttp.open("GET", document.getElementById("textoIntroducido").value+ ".txt", true);
+            // xhttp.send();
+            fetch(input+".txt")
+            .then((response)=>{
+            if(response.ok){
+                return response.text();
+            }else{
+                throw Error(response.statusText);
+            }
+        })
+            .then((respuesta)=>{
+                textoCargado.value = respuesta;
+                textoCargado.style.display = "block";
+            }).catch((error)=>{
+                textoCargado.value ="File not Found";
+            })  
+        }
+        function borrarContenido() {
+             document.getElementById("textoIntroducido").value = "";
+             textoCargado.style.display = "none";
+         }
+            
+    </script>
+</body>
+
+</html>

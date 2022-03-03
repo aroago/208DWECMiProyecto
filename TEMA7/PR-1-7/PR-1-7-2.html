@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        form {
+            display: flex;
+            justify-content: center;
+        }
+
+        table {
+            border: solid 1px black;
+        }
+
+        th,
+        tr,
+        td {
+            border: solid 1px black;
+        }
+    </style>
+</head>
+
+<body>
+    <form>
+        <div>
+            <select id="desplegable">
+                <option value="mas" selected>Ver Mas Opciones</option>
+                <option value="pais">Pais</option>
+                <option value="discografica">Discografica</option>
+                <option value="precio">Precio</option>
+                <option value="año">Año</option>
+            </select>
+        </div>
+        <button type="button" onclick="loadXMLDoc()">Cargar Catalogo</button>
+    </form>
+    <div id=contenedor>
+
+    </div>
+    <table id=lista>
+        <tr id="titulos">
+            <th>
+                Titulo
+            </th>
+            <th>
+                Artista
+            </th>
+            <th>
+            </th>
+        </tr>
+
+    </table>
+    <script>
+        /* 2.Crea una aplicación web con un botón“Cargar catálogo”y un desplegable.Cuando
+         pulsemos al botón se cargará una tabla con información extraída deun documento
+         xml que se encuentra en el servidor. El documento contiene información sobre
+         discos. Inicialmente aparecerá una tabla con dos columnas“Título” y “Artista”.
+         El desplegable contendrá cuatro valores: País, Discográfica, País y Año. Cuando
+         seleccionamos unode ellos, añadiremos una columna a nuestra tabla con la
+         información correspondiente.*/
+        var mostrarTexto = document.getElementById("contenedor");
+        var lista = document.getElementById("lista");
+
+        var desplegableHTML = document.getElementById("desplegable");
+
+
+        function loadXMLDoc() {
+            var xhttp = new XMLHttpRequest();
+
+            var catalogo, adiscos, titulo, artista, pais, año, nuevoElementoTitulo, nuevafila;
+
+            xhttp.onload = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                   var catalogo = xhttp.responseXML;
+                     var adiscos = catalogo.getElementsByTagName("CD");
+                    for (i = 0; i < adiscos.length; i++) {
+                        titulo = adiscos[i].getElementsByTagName("TITLE")[0].textContent;
+                        artista = adiscos[i].getElementsByTagName("ARTIST")[0].textContent;
+                        nuevafila = document.createElement("tr");
+                        nuevoElementoTitulo = document.createElement("td");
+                        nuevoElementoArtista = document.createElement("td");
+                        nuevoElementoVacio = document.createElement("td");
+                        nuevoElementoTitulo.innerHTML = titulo;
+                        nuevoElementoArtista.innerHTML = artista;
+                        nuevoElementoVacio.innerHTML="";
+                        nuevafila.appendChild(nuevoElementoTitulo);
+                        nuevafila.appendChild(nuevoElementoArtista);
+                        nuevafila.appendChild(nuevoElementoVacio);
+                        lista.appendChild(nuevafila);
+                    }
+                    desplegableHTML.addEventListener("change", function () {
+                        var catalogo = xhttp.responseXML;
+                     var adiscos = catalogo.getElementsByTagName("CD");
+                        var titulos = document.getElementById("titulos");
+                        var catalogo, adiscos, compañia, pais, año, nuevoElementoCompañia, nuevafila, nuevaColumna, nuevoElementoPais;
+                        if (desplegableHTML.value == "pais") {
+                            for (i = 0; i < adiscos.length; i++) {
+                                pais = adiscos[i].getElementsByTagName("COUNTRY")[0].textContent;
+                                var tabla = document.getElementsByTagName("tr");
+                                tabla[i + 1].lastElementChild.innerHTML=pais;
+                            }
+                            tabla[0].lastElementChild.innerHTML="Pais";
+                        }
+                        if (desplegableHTML.value == "discografica") {
+                            for (i = 0; i < adiscos.length; i++) {
+                                discografica = adiscos[i].getElementsByTagName("COMPANY")[0].textContent;
+                                var tabla = document.getElementsByTagName("tr");
+                                tabla[i + 1].lastElementChild.innerHTML=discografica;
+                            }
+                            tabla[0].lastElementChild.innerHTML="Discografica";
+                            
+                        }
+                        if (desplegableHTML.value == "precio") {
+                            for (i = 0; i < adiscos.length; i++) {
+                                precio = adiscos[i].getElementsByTagName("PRICE")[0].textContent;
+                                nuevoElementoprecio= document.createElement("td");
+                                nuevoElementoprecio.innerHTML = precio;
+                                var tabla = document.getElementsByTagName("tr");
+                                tabla[i + 1].appendChild(nuevoElementoprecio);
+                            }
+                            nuevoElementoTitulo = document.createElement("th");
+                            nuevoElementoTitulo.innerHTML = "Precio";
+                            tabla[0].appendChild(nuevoElementoTitulo);
+                        }
+                        if (desplegableHTML.value == "año") {
+                            for (i = 0; i < adiscos.length; i++) {
+                                año= adiscos[i].getElementsByTagName("YEAR")[0].textContent;
+                                nuevoElementoaño= document.createElement("td");
+                                nuevoElementoaño.innerHTML = año;
+                                var tabla = document.getElementsByTagName("tr");
+                                tabla[i + 1].appendChild(nuevoElementoaño);
+                            }
+                            nuevoElementoTitulo = document.createElement("th");
+                            nuevoElementoTitulo.innerHTML = "Año";
+                            tabla[0].appendChild(nuevoElementoTitulo);
+                        }
+                    });
+                } else {
+                    mostrarTexto.innerHTML = "File not Found";
+                }
+            };
+            xhttp.open("GET", "cd_catalog.xml", true);
+            xhttp.send();
+        }
+    </script>
+</body>
+
+</html>

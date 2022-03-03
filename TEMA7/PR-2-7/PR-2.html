@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>formulario</title>
+    <style>
+        .container {
+            margin: auto;
+            width: 50%;
+            text-align: center;
+            font-family: monospace;
+        }
+
+        h3 {
+            text-align: left;
+            margin: 15px 0px 0px 0px;
+        }
+
+        input {
+            width: 100%;
+            height: 25px;
+            border: 2px rgb(96, 182, 185) outset;
+            border-radius: 5px;
+        }
+
+        button {
+            border: 2px rgb(96, 182, 185) outset;
+            border-radius: 5px;
+            width: 100%;
+            height: 30px;
+            margin-top: 20px;
+            background-color: lightgray;
+        }
+
+        .incorrecto {
+            border: red 2px outset;
+        }
+
+        .correcto {
+            border: rgb(30, 255, 0) 2px outset;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <form name="formulario" action="" method="post">
+            <h1>Registrar Usuario</h1>
+            <h3>nombre: </h3>
+            <input type="text" id="nombre" name="CodUsuario" class="incorrecto" value="">
+            <br>
+
+            <h3>Apellidos: </h3>
+            <input type="text" id="apellidos" name="ApeUsuario" class="incorrecto" value="">
+
+            <br>
+            <h3>Email: </h3>
+            <input type="email" id="email" name="email" class="incorrecto" value="">
+
+            <br>
+            <h3>NIF: </h3>
+            <input type="text" id="nif" name="nif" class="incorrecto" value="">
+            <br>
+            <button type="button" id="enviar">Enviar</button>
+        </form>
+    </div>
+    <script>
+        window.addEventListener("load", comienzo);
+        let nombre = document.getElementById("nombre");
+        let apellidos = document.getElementById("apellidos");
+        let email = document.getElementById("email");
+        let nif = document.getElementById("nif");
+
+        function comienzo() {
+            nombre.addEventListener("keyup",validarNombre);
+            apellidos.addEventListener("keyup", validarApellido);
+            email.addEventListener("keyup", validarEmail);
+            nif.addEventListener("keyup", validarDNI);
+            var expreg = new RegExp("[A-Za-z]{2}");
+            var expregEmail = /^[A-Za-z]+\@[A-Za-z]+/;
+
+            function validarNombre() {
+                if (expreg.test(nombre.value)) {
+                    nombre.classList.remove("incorrecto");
+                    nombre.classList.add("correcto");
+                } else {
+                    nombre.classList.remove("correcto");
+                    nombre.classList.add("incorrecto");
+                }
+            }
+            function validarApellido() {
+                if (expreg.test(apellidos.value)) {
+                    apellidos.classList.remove("incorrecto");
+                    apellidos.classList.add("correcto");
+                } else {
+                    apellidos.classList.remove("correcto");
+                    apellidos.classList.add("incorrecto");
+                }
+            }
+            function validarEmail() {
+                if (expregEmail.test(email.value)) {
+                    email.classList.remove("incorrecto");
+                    email.classList.add("correcto");
+                } else {
+                    email.classList.remove("correcto");
+                    email.classList.add("incorrecto");
+                }
+            }
+            function validarDNI() {
+                fetch("https://daw202.ieslossauces.es/202DWESAplicacionFinalMulticapaPOO/API/validar.php?dni=" + nif.value)
+                .then((response)=>{
+                    if(response.ok){
+                        return response.json();
+                    }else{
+                        throw Error("El fichero no se ha encontrado");
+                    }
+                })
+                .then((respuesta)=>{
+                    if(respuesta.respuesta){
+                        nif.classList.remove("incorrecto");
+                        nif.classList.add("correcto");
+                    }else{
+                        nif.classList.remove("correcto");
+                        nif.classList.add("incorrecto");
+                    }
+                }).catch((error)=> {
+                  
+                    console.log("error: "+error.menssage);
+                })
+            }
+        }
+    </script>
+</body>
+
+</html>

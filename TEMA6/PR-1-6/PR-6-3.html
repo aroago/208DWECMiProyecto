@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html {
+            height: 100%;
+            width: 100%;
+        }
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            width: 100%;
+        }
+        #capa {
+            height: 50%;
+            width: 50%;
+            background-color: white;
+            border: solid black 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="capa">
+    </div>
+    <script>
+        var capa = document.getElementById("capa");
+
+        capa.addEventListener("mouseover", function (event) {
+            capa.style.background = "green";
+        });
+        capa.addEventListener("mouseout", function (event) {
+            capa.style.background = "white";
+        });
+        capa.addEventListener("mouseup", function (event) {
+            capa.style.background = "green";
+        });
+        capa.addEventListener("mousedown", function (event) {
+            if (event.button == 0) {
+                capa.style.background = 'red';
+            } else {
+                capa.style.background = 'blue';
+            }
+        });
+        capa.addEventListener("contextmenu", function (event) {
+            event.preventDefault();
+        });
+    </script>
+</body>
+
+</html>
