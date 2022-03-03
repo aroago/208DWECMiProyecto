@@ -86,7 +86,7 @@ function comienzo() {
 	function borrarLienzo() {
 		for (const iterator of zonaDibujo.children) {
 			for (const td of iterator.children) {
-				td.style.background = "white";
+				td.classList.remove(td.classList.item(1));
 			}
 		}
 	}

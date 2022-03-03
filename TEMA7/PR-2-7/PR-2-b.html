@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .usuario{
+            width: 30%;
+            padding: 5%;
+            margin: auto;
+            text-align: center;
+            background-color: rgb(165, 198, 199);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="usuario">
+
+    </div>
+    <script>
+        fetch("https://randomuser.me/api/")
+            .then((response) => {
+                if (response) {
+                    return response.json();
+                } else {
+                    throw Error("El fichero no se ha encontrado");
+                }
+            })
+            .then((data) => {
+                datos = data.results[0];
+                mostrarUsuarios(datos);
+            }).catch((error) => {
+                console.log("error: " + error.menssage);
+            })
+            var usuarioDiv=document.getElementsByClassName("usuario")[0];
+            function mostrarUsuarios(usuario) {
+                let foto=usuario.picture.large;
+                let nombre=usuario.name.first +" " +datos.name.last;
+                let correo=usuario.email;
+                let calle=usuario.location.street.number +" "+datos.location.street.name;
+                let ciudad=usuario.location.city+" ("+usuario.location.state+") ";
+                //Imagenes
+                let img=document.createElement("img");
+                img.setAttribute("src", foto);
+                img.alt = `imagen`;
+                //creacion de parrafos
+                let nuevoPNombre=document.createElement("p");
+                let nuevoPcorreo=document.createElement("p");
+                let nuevoPcalle=document.createElement("p");
+                let nuevoPciudad=document.createElement("p");
+                //asignacion txto parrafos
+                
+                nuevoPNombre.innerHTML=nombre;
+                nuevoPcorreo.innerHTML=correo;
+                nuevoPcalle.innerHTML=calle;
+                nuevoPciudad.innerHTML=ciudad;
+                //añadirlo al DOM
+                usuarioDiv.appendChild(img);
+                usuarioDiv.appendChild(nuevoPNombre);
+                usuarioDiv.appendChild(nuevoPcorreo);
+                usuarioDiv.appendChild(nuevoPcalle);
+                usuarioDiv.appendChild(nuevoPciudad);
+               
+
+            }
+     
+       </script>
+</body>
+
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        .usuario {
+            width: 100%;
+            height: 100%;
+            padding: 5%;
+            display: grid;
+            grid-template-columns: repeat(6, 200px);
+            margin-left: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="usuario">
+        </div>
+    </div>
+
+    <script>
+        fetch("https://randomuser.me/api/?results=10")
+            .then((response) => {
+                if (response) {
+                    return response.json();
+                } else {
+                    throw Error("El fichero no se ha encontrado");
+                }
+            })
+            .then((data) => {
+
+                for (let index = 0; index < 10; index++) {
+                    datos = data.results[index];
+                    mostrarUsuarios(datos);
+                    boton.addEventListener("click", camiarUsuario);
+                }
+
+            }).catch((error) => {
+                console.log("error: " + error.menssage);
+            })
+        var usuarioDivPrincipal = document.getElementsByClassName("usuario")[0];
+        function mostrarUsuarios(usuario) {
+            let divActual = evento.target.parentElement;
+            let foto = usuario.picture.large;
+            let nombre = usuario.name.first + " " + datos.name.last;
+            let correo = usuario.email;
+            let calle = usuario.location.street.number + " " + datos.location.street.name;
+            let ciudad = usuario.location.city + " (" + usuario.location.state + ") ";
+            //Imagenes
+            let img = document.createElement("img");
+            img.setAttribute("src", foto);
+            img.alt = `imagen`;
+            //creacion de parrafos
+            let nuevoPNombre = document.createElement("p");
+            let nuevoPcorreo = document.createElement("p");
+            let nuevoPcalle = document.createElement("p");
+            let nuevoPciudad = document.createElement("p");
+            let usuarioDiv = document.createElement("div");
+            //boton
+            let boton = document.createElement("button");
+            boton.setAttribute("class", "cambiar");
+            boton.innerHTML = "cambiar";
+
+            //asignacion txto parrafos
+            nuevoPNombre.innerHTML = nombre;
+            nuevoPcorreo.innerHTML = correo;
+            nuevoPcalle.innerHTML = calle;
+            nuevoPciudad.innerHTML = ciudad;
+            //añadirlo al DOM
+            usuarioDiv.appendChild(img);
+            usuarioDiv.appendChild(nuevoPNombre);
+            usuarioDiv.appendChild(nuevoPcorreo);
+            usuarioDiv.appendChild(nuevoPcalle);
+            usuarioDiv.appendChild(nuevoPciudad);
+            usuarioDiv.appendChild(boton);
+            usuarioDivPrincipal.appendChild(usuarioDiv);
+            divActual.innerHTML = "";
+            divActual.appendChild(usuarioDiv);
+            boton.addEventListener("click", camiarUsuario);
+
+        }
+
+        function camiarUsuario() {
+            let boton = usuarioDivPrincipal.querySelector("buton");
+            boton.addEventListener("click", (ev) => {
+                fetch("https://randomuser.me/api/")
+                    .then((response) => {
+                        if (response) {
+                            return response.json();
+                        }
+                    })
+                    .then((data) => {
+                        datos = data.results[0];
+                        mostrarUsuarios(divActual, datos);
+                        boton.addEventListener("click", camiarUsuario);
+                    })
+
+            }).catch((error) => {
+                console.log("error: " + error.menssage);
+            })
+        }
+    </script>
+</body>
+
+</html>
