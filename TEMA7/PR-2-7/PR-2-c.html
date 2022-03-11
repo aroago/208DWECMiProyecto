@@ -27,9 +27,10 @@
     </div>
 
     <script>
+        var usuarioDivPrincipal = document.getElementsByClassName("usuario")[0];
         fetch("https://randomuser.me/api/?results=10")
             .then((response) => {
-                if (response) {
+                if (response.ok) {
                     return response.json();
                 } else {
                     throw Error("El fichero no se ha encontrado");
@@ -39,16 +40,17 @@
 
                 for (let index = 0; index < 10; index++) {
                     datos = data.results[index];
-                    mostrarUsuarios(datos);
-                    boton.addEventListener("click", camiarUsuario);
+                    var usuarioDiv = document.createElement("div");
+                    usuarioDivPrincipal.appendChild(usuarioDiv);
+                    mostrarUsuarios(datos,usuarioDiv);
                 }
 
             }).catch((error) => {
                 console.log("error: " + error.menssage);
             })
-        var usuarioDivPrincipal = document.getElementsByClassName("usuario")[0];
-        function mostrarUsuarios(usuario) {
-            let divActual = evento.target.parentElement;
+      
+        function mostrarUsuarios(usuario,usuarioDiv) {
+            usuarioDiv.innerHTML="";
             let foto = usuario.picture.large;
             let nombre = usuario.name.first + " " + datos.name.last;
             let correo = usuario.email;
@@ -63,7 +65,6 @@
             let nuevoPcorreo = document.createElement("p");
             let nuevoPcalle = document.createElement("p");
             let nuevoPciudad = document.createElement("p");
-            let usuarioDiv = document.createElement("div");
             //boton
             let boton = document.createElement("button");
             boton.setAttribute("class", "cambiar");
@@ -81,29 +82,22 @@
             usuarioDiv.appendChild(nuevoPcalle);
             usuarioDiv.appendChild(nuevoPciudad);
             usuarioDiv.appendChild(boton);
-            usuarioDivPrincipal.appendChild(usuarioDiv);
-            divActual.innerHTML = "";
-            divActual.appendChild(usuarioDiv);
             boton.addEventListener("click", camiarUsuario);
 
         }
 
-        function camiarUsuario() {
-            let boton = usuarioDivPrincipal.querySelector("buton");
-            boton.addEventListener("click", (ev) => {
+        function camiarUsuario(ev) {
                 fetch("https://randomuser.me/api/")
                     .then((response) => {
-                        if (response) {
+                        if (response.ok) {
                             return response.json();
                         }
                     })
                     .then((data) => {
                         datos = data.results[0];
-                        mostrarUsuarios(divActual, datos);
-                        boton.addEventListener("click", camiarUsuario);
-                    })
-
-            }).catch((error) => {
+                        mostrarUsuarios(datos,ev.target.parentElement);
+                        
+                    }).catch((error) => {
                 console.log("error: " + error.menssage);
             })
         }

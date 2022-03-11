@@ -1,0 +1,53 @@
+<html>
+
+<head>
+    <title>Probando canvas</title>
+    <style>
+        h1 {
+            color: rgb(95, 158, 160);
+            color: crimson;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            //Recibimos el elemento canvas
+            var elemento = document.getElementById('micanvas');
+            //Comprobación sobre si encontramos un elemento
+            //y podemos extraer su contexto con getContext(), que indica compatibilidad con canvas
+            if (elemento && elemento.getContext) {
+                //Accedo al contexto de '2d' de este canvas, necesario para dibujar
+                var contexto = elemento.getContext('2d');
+                if (contexto) {
+                    //Si tengo el contexto 2d es que todo ha ido bien y puedo empezar a dibujar en el canvas
+                    //Comienzo dibujando un rectángulo
+                    contexto.fillRect(10, 10, 400, 400);
+                     //cambio el color de estilo de dibujo a azul
+                    contexto.fillStyle = 'rgb(95, 158, 160)';
+                    //dibujo otro rectángulo
+                    contexto.fillRect(60, 60, 400, 400);
+                    //cambio el color de estilo de dibujo a crismon
+                    contexto.fillStyle = 'crimson';
+                    //dibujo otro rectángulo
+                    contexto.fillRect(210, 260, 100, 20);
+                    //ojos
+                    contexto.arc(175, 185, 30, 0, Math.PI * 2, true);  // Ojo izquierdo
+                    contexto.moveTo(375, 185);
+                    contexto.arc(345, 185, 30, 0, Math.PI * 2, true);  // Ojo derecho
+                    contexto.fillStyle = "crimson";
+                    contexto.fill();
+                }
+            }
+        }
+
+    </script>
+</head>
+
+<body>
+
+    <canvas id="micanvas" width="500" height="500">
+
+    </canvas>
+
+</body>
+
+</html>

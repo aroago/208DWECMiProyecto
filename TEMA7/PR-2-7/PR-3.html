@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <main>
+        <form method="GET">
+            <textarea name="textArea" cols="30" rows="10"></textarea>
+            <button type="button" id="botton">Buscar Mapa</button>
+        </form>
+    </main>
+
+    <script>
+        window.addEventListener("load", (ev) => {
+            let main = document.querySelector("main");
+            let apikey = document.querySelector("textarea");
+            let buscar = document.querySelector("button");
+            buscar.addEventListener("click",procesarFetch(apikey,main));
+        })
+        async function procesarFetch(apiKey, elemento) {
+            let form = elemento.querySelector("form");
+            var headers = new Headers({
+                "cache-control": "no-cache"
+            });
+            var conf = {
+                method: "GET",
+                mode: "cors",
+                headers: headers,
+            }
+            try {
+                const resp1 = await fetch("https://opendata.aemet.es/opendata/api/valores/climatologicos/inventarioestaciones/todasestaciones/?api_key=" + apikey, conf)
+                const data1 = await resp1.json();
+                const resp2 = await fetch(data1.datos, conf);
+                const mapa = await resp2.blob();
+                const img = document.createElement("img");
+                img.setAttribute("src", URL.createObjectURL(mapa));
+                elemento.removeChild(form);
+                elemento.appendChild(img);
+
+            } catch (error) {
+                let p = document.createElement("p");
+                p.innerHTML = "<strong>Error al cargar</strong>" + error;
+                elemento.appendChild(p);
+
+            }
+        }
+      // eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmYXBhdDM5MzgzQHZhcGFrYS5jb20iLCJqdGkiOiIxNjljYjhlNS02MDBmLTQyZGEtOTQzOC00MzJjODExMGY4MWIiLCJpc3MiOiJBRU1FVCIsImlhdCI6MTY0NjY0NjczMSwidXNlcklkIjoiMTY5Y2I4ZTUtNjAwZi00MmRhLTk0MzgtNDMyYzgxMTBmODFiIiwicm9sZSI6IiJ9.qz_MV2ZTUtwxVsej3uEni_cxC-0vkIb7W1qVtatl0FI
+
+    </script>
+</body>
+
+</html>
